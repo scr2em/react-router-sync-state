@@ -1,6 +1,6 @@
 {
 	"name": "@scr2em/react-router-sync-state",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "",
 	"main": "dist/index.mjs",
 	"types": "dist/index.d.mts",
@@ -24,7 +24,7 @@
 		"dist"
 	],
 	"license": "ISC",
-	"dependencies": {
+	"peerDependencies": {
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-router-dom": "6.22.3"
