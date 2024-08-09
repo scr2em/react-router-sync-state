@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 
-export function useQueryBooleanState(searchParamName: string, options: { defaultValue: boolean }) {
+export function useBooleanState(searchParamName: string, options: { defaultValue: boolean }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const acquiredSearchParam = searchParams.get(searchParamName);

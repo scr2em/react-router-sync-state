@@ -1,9 +1,9 @@
 {
 	"name": "@scr2em/react-router-sync-state",
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"description": "",
 	"main": "dist/index.mjs",
-	"types": "build/index.d.mts",
+	"types": "dist/index.d.mts",
 	"scripts": {
 		"watch": "tsup --watch",
 		"build": "tsup",

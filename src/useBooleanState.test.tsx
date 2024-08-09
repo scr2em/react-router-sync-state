@@ -1,4 +1,4 @@
-import { useQueryBooleanState } from "./useBooleanState";
+import { useBooleanState } from "./useBooleanState";
 import { act, renderHook } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
@@ -19,14 +19,14 @@ describe("useBooleanState", () => {
   });
 
   it("should not set the default value (false) in the url", async () => {
-    const { result } = customRenderHook(() => useQueryBooleanState("testParam", { defaultValue: false }));
+    const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: false }));
 
     expect(result.current.value).toBe(false);
     expect(window.location.search).toBe("");
   });
 
   it("should set the default value (true) in the url", async () => {
-    const { result } = customRenderHook(() => useQueryBooleanState("testParam", { defaultValue: true }));
+    const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: true }));
 
     expect(result.current.value).toBe(true);
     expect(window.location.search).toBe("");
@@ -36,7 +36,7 @@ describe("useBooleanState", () => {
     updateUrlSearchParams("testParam=1234");
     expect(global.location.search).toBe("?testParam=1234");
 
-    const { result } = customRenderHook(() => useQueryBooleanState("testParam", { defaultValue: true }));
+    const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: true }));
 
     expect(result.current.value).toBe(true);
     expect(window.location.search).toBe("");
@@ -46,14 +46,14 @@ describe("useBooleanState", () => {
     updateUrlSearchParams("testParam=1234");
     expect(global.location.search).toBe("?testParam=1234");
 
-    const { result } = customRenderHook(() => useQueryBooleanState("testParam", { defaultValue: false }));
+    const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: false }));
 
     expect(result.current.value).toBe(false);
     expect(window.location.search).toBe("");
   });
 
   it("should toggle the value", async () => {
-    const { result } = customRenderHook(() => useQueryBooleanState("testParam", { defaultValue: false }));
+    const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: false }));
 
     expect(result.current.value).toBe(false);
     expect(window.location.search).toBe("");
@@ -69,7 +69,7 @@ describe("useBooleanState", () => {
   });
 
   it("should set the value and param correctly to true ", async () => {
-    const { result } = customRenderHook(() => useQueryBooleanState("testParam", { defaultValue: false }));
+    const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: false }));
 
     expect(window.location.search).toBe("");
 
@@ -82,7 +82,7 @@ describe("useBooleanState", () => {
   });
 
   it("should set the value and param correctly to false ", async () => {
-    const { result } = customRenderHook(() => useQueryBooleanState("testParam", { defaultValue: false }));
+    const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: false }));
 
     expect(window.location.search).toBe("");
 

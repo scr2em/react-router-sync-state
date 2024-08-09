@@ -1,4 +1,4 @@
-import { useQueryBooleanState } from "./useBooleanState";
+import { useBooleanState } from "./useBooleanState";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useNumberState } from "./useNumberState";
@@ -6,7 +6,7 @@ import { useMultiNumberState } from "./useMultiNumberState";
 import { useStringState } from "./useStringState";
 
 function BooleanExample() {
-  const { value, toggle } = useQueryBooleanState("toggle", { defaultValue: true });
+  const { value, toggle } = useBooleanState("toggle", { defaultValue: true });
 
   return (
     <div>

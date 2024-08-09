@@ -2,7 +2,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig([
   {
-    entry: ["src/index.tsx"],
+    entry: ["src/index.ts"],
     platform: "browser",
     format: ["esm"], // Build for commonJS and ES modules
     outDir: "./dist",
