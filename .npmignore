@@ -1,0 +1,5 @@
+src
+.idea
+tsconfig.json
+tsup.config.ts
+.prettierrc
