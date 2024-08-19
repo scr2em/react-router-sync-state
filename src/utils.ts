@@ -21,15 +21,8 @@ export function arraysAreIdentical<T>(arr1: T[], arr2: T[]): boolean {
   }
 
   // Sort both arrays
-  const sortedArr1 = [...arr1].sort();
-  const sortedArr2 = [...arr2].sort();
+  const sortedArr1 = [...arr1].sort().toString();
+  const sortedArr2 = [...arr2].sort().toString();
 
-  // Compare sorted arrays
-  for (let i = 0; i < sortedArr1.length; i++) {
-    if (sortedArr1[i] !== sortedArr2[i]) {
-      return false;
-    }
-  }
-
-  return true;
+  return sortedArr1 === sortedArr2;
 }

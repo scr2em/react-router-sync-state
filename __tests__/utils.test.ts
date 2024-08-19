@@ -1,4 +1,4 @@
-import { isNumeric, isStringArrayOfNumbers, parseToArrayOfNumber, stringToArrayOfNumbers } from "./utils";
+import { isNumeric, isStringArrayOfNumbers, parseToArrayOfNumber, stringToArrayOfNumbers } from "../src/utils";
 
 describe("isNumeric", () => {
   it("should checks if any value can be coerced to a give an number", () => {
