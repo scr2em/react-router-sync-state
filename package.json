@@ -1,6 +1,6 @@
 {
 	"name": "@scr2em/react-router-sync-state",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "dist/index.mjs",
 	"types": "dist/index.d.mts",
