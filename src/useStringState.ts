@@ -4,10 +4,16 @@ import { useEffect } from "react";
 export function useStringState(searchParamName: string, options: { defaultValue: string }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const acquiredSearchParam = searchParams.get(searchParamName);
+  const acquiredSearchParam = searchParams.get(searchParamName); // string | null
 
-  const finalValue = typeof acquiredSearchParam === "string" ? acquiredSearchParam : options.defaultValue;
+  const finalValue = acquiredSearchParam || options.defaultValue;
 
+  /**
+   * @description The set() method of the useStringState  interface set and remove duplicated the params value.
+   * @param newValue
+   * @param replace
+   * @return void
+   */
   const set = (newValue: string, replace = true) => {
     // if we are setting the default value, don't add it to the url
     if (newValue === options.defaultValue) {
@@ -25,12 +31,11 @@ export function useStringState(searchParamName: string, options: { defaultValue:
     if (finalValue === options.defaultValue) {
       searchParams.delete(searchParamName);
       setSearchParams(searchParams);
-    } else {
-      // if the url has an invalid value, remove it
-      if (typeof acquiredSearchParam !== "string") {
-        searchParams.delete(searchParamName);
-        setSearchParams(searchParams);
-      }
+
+      // acquiredSearchParam = string | null
+    } else if (!acquiredSearchParam) {
+      searchParams.delete(searchParamName);
+      setSearchParams(searchParams);
     }
   }, []);
 

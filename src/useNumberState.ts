@@ -5,7 +5,7 @@ import { isNumeric } from "./utils";
 export function useNumberState(searchParamName: string, options: { defaultValue: number }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const acquiredSearchParam = searchParams.get(searchParamName);
+  const acquiredSearchParam = searchParams.get(searchParamName); // string | null
 
   const finalValue = isNumeric(acquiredSearchParam) ? (Number(acquiredSearchParam) as number) : options.defaultValue;
 
