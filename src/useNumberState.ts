@@ -7,7 +7,7 @@ export function useNumberState(searchParamName: string, options: { defaultValue:
 
   const acquiredSearchParam = searchParams.get(searchParamName); // string | null
 
-  const finalValue = acquiredSearchParam ? Number(acquiredSearchParam) : options.defaultValue;
+  const finalValue = isNumeric(acquiredSearchParam) ? (Number(acquiredSearchParam) as number) : options.defaultValue;
 
   const set = (newValue: number, replace = true) => {
     // if we are setting the default value, don't add it to the url
