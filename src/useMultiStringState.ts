@@ -12,12 +12,22 @@ export function useMultiStringState(searchParamName: string, options: { defaultV
   const set = (newValue: string[], replace = true) => {
     // if we are setting the default value, don't add it to the url
     if (arraysAreIdentical(newValue, options.defaultValue)) {
-      searchParams.delete(searchParamName);
-      setSearchParams(searchParams, { replace });
+      setSearchParams(
+        (prev) => {
+          prev.delete(searchParamName);
+          return prev;
+        },
+        { replace },
+      );
     } else {
-      searchParams.delete(searchParamName);
-      searchParams.append(searchParamName, newValue.join(options.delimiter));
-      setSearchParams(searchParams, { replace });
+      setSearchParams(
+        (prev) => {
+          prev.delete(searchParamName);
+          prev.append(searchParamName, newValue.join(options.delimiter));
+          return prev;
+        },
+        { replace },
+      );
     }
   };
 

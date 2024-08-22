@@ -13,12 +13,22 @@ export function useBooleanState(searchParamName: string, options: { defaultValue
   const set = (newValue: boolean, replace = true) => {
     // if we are setting the default value, don't add it to the url
     if (newValue.toString() === options.defaultValue.toString()) {
-      searchParams.delete(searchParamName);
-      setSearchParams(searchParams, { replace });
+      setSearchParams(
+        (prev) => {
+          prev.delete(searchParamName);
+          return prev;
+        },
+        { replace },
+      );
     } else {
-      searchParams.delete(searchParamName);
-      searchParams.append(searchParamName, newValue.toString());
-      setSearchParams(searchParams, { replace });
+      setSearchParams(
+        (prev) => {
+          prev.delete(searchParamName);
+          prev.append(searchParamName, newValue.toString());
+          return prev;
+        },
+        { replace },
+      );
     }
   };
 

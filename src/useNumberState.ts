@@ -12,12 +12,22 @@ export function useNumberState(searchParamName: string, options: { defaultValue:
   const set = (newValue: number, replace = true) => {
     // if we are setting the default value, don't add it to the url
     if (newValue === options.defaultValue) {
-      searchParams.delete(searchParamName);
-      setSearchParams(searchParams, { replace });
+      setSearchParams(
+        (prev) => {
+          prev.delete(searchParamName);
+          return prev;
+        },
+        { replace },
+      );
     } else {
-      searchParams.delete(searchParamName);
-      searchParams.append(searchParamName, newValue.toString());
-      setSearchParams(searchParams, { replace });
+      setSearchParams(
+        (prev) => {
+          prev.delete(searchParamName);
+          prev.append(searchParamName, newValue.toString());
+          return prev;
+        },
+        { replace },
+      );
     }
   };
 
