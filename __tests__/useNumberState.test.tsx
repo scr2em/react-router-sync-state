@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { customRenderHook, updateUrlSearchParams } from "./useBooleanState.test";
 import { before } from "node:test";
 import { useNumberState } from "../src";
+import { customRenderHook, updateUrlSearchParams } from "../src/test-utils";
 
 const param = "page";
 const value = 10;

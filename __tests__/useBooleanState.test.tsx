@@ -1,18 +1,7 @@
-import { act, renderHook } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { act } from "@testing-library/react";
 import { useBooleanState } from "../src";
+import { customRenderHook, updateUrlSearchParams } from "../src/test-utils";
 
-export function updateUrlSearchParams(searchParams: string) {
-  const url = new URL(window.location.href);
-  url.search = searchParams;
-  window.history.pushState({}, "", url);
-}
-
-export function customRenderHook<T>(hook: () => T) {
-  return renderHook(hook, {
-    wrapper: ({ children }) => <BrowserRouter>{children}</BrowserRouter>,
-  });
-}
 describe("useBooleanState", () => {
   beforeEach(() => {
     updateUrlSearchParams("");

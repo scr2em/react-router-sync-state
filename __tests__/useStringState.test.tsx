@@ -1,64 +1,63 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeEach } from "vitest";
 import { useStringState } from "../src";
-import { customRenderHook, updateUrlSearchParams } from "./useBooleanState.test";
-import { before } from "node:test";
+import { customRenderHook, updateUrlSearchParams } from "../src/test-utils";
 
 const param = "firstName";
 const username = "john";
 const defaultValue = "test";
-const newValue = "test 1";
+const newValue = "testingNow";
 
 describe("useStringState", () => {
-  describe("useBooleanState as a 'Value'", () => {
-    it("Should be include firstname with john as a value.", function () {
+  beforeEach(() => {
+    updateUrlSearchParams("");
+  });
+
+  describe("Initial value", () => {
+    it("should use the value from URL when available", () => {
       updateUrlSearchParams(`${param}=${username}`);
-      const { result } = customRenderHook(() => useStringState(param, { defaultValue: defaultValue }));
+      const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
       expect(result.current.value).toBe(username);
     });
 
-    it(`Should be get ${defaultValue} as a default value when pass param without value`, function () {
+    it("should use default value when URL parameter is empty", () => {
       updateUrlSearchParams(`${param}=`);
-      const { result } = customRenderHook(() => useStringState(param, { defaultValue: defaultValue }));
+      const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
       expect(result.current.value).toBe(defaultValue);
     });
 
-    it(`Should be get ${defaultValue} as a default value when not pass the target param.`, function () {
-      updateUrlSearchParams(``);
-      const { result } = customRenderHook(() => useStringState(param, { defaultValue: defaultValue }));
+    it("should use default value when URL parameter is not present", () => {
+      const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
       expect(result.current.value).toBe(defaultValue);
     });
 
-    it(`Should be not include param ${param} when set default value`, function () {
+    it("should not include param in URL when value is default", () => {
       updateUrlSearchParams(`${param}=${defaultValue}`);
-      customRenderHook(() => useStringState(param, { defaultValue: defaultValue }));
+      customRenderHook(() => useStringState(param, { defaultValue }));
 
       expect(window.location.search).toBe("");
     });
   });
 
-  describe("useBooleanState as a func 'Set'", () => {
-    it(`Should be with empty search params when updated the URL with default value.`, async function () {
-      before(function () {
-        updateUrlSearchParams(`${param}=${username}`);
-        const { result } = customRenderHook(() => useStringState(param, { defaultValue: defaultValue }));
-        result.current.set(defaultValue);
-      });
+  describe("set function", () => {
+    it("should remove param from URL when set to default value", () => {
+      updateUrlSearchParams(`${param}=${username}`);
+      const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
+
+      result.current.set(defaultValue);
 
       expect(window.location.search).toBe("");
     });
 
-    it(`Should be include ${newValue} as a new value.`, async function () {
-      before(function () {
-        updateUrlSearchParams(`${param}=${username}`);
-        const { result } = customRenderHook(() => useStringState(param, { defaultValue: defaultValue }));
-        result.current.set(newValue);
-      });
+    it("should update URL with new value", () => {
+      updateUrlSearchParams(`${param}=${username}`);
+      const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
-      const { result } = customRenderHook(() => useStringState(param, { defaultValue: defaultValue }));
-      expect(result.current.value).toBe(newValue);
+      result.current.set(newValue);
+
+      expect(window.location.search).toBe(`?${param}=${newValue}`);
     });
   });
 });

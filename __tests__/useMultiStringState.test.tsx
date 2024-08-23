@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { useMultiStringState } from "../src";
 import { before } from "node:test";
-import { customRenderHook, updateUrlSearchParams } from "./useBooleanState.test";
+import { customRenderHook, updateUrlSearchParams } from "../src/test-utils";
+
 const param = "ids";
 const ids = ["fG7rX", "aB2kL", "J9nQw", "eR6tZ", "mN4vP", "H3oKs", "bY1uV", "xW8zJ", "pL5rM", "cD2qF"];
 const newIds = ["pL5rM", "cD2qF"];

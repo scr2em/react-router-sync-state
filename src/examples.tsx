@@ -86,7 +86,9 @@ function MultiNumberExample() {
 }
 
 function StringExample() {
-  const { value, set } = useStringState("name", { defaultValue: "mohamed" });
+  const { value, set } = useStringState("name", {
+    defaultValue: "mohamed",
+  });
 
   return (
     <div>

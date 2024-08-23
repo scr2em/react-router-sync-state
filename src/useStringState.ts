@@ -1,26 +1,22 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import { assertString } from "./utils";
 
 export function useStringState<T extends string>(
   searchParamName: string,
-  options: { defaultValue: T; validator: (acquiredString: string) => acquiredString is T },
+  options: { defaultValue: T; validator?: (acquiredString: string) => acquiredString is T },
 ) {
+  const { defaultValue, validator = assertString } = options;
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const acquiredSearchParam = searchParams.get(searchParamName); // string | null
 
-  const finalValue =
-    acquiredSearchParam && options.validator(acquiredSearchParam) ? acquiredSearchParam : options.defaultValue;
+  const finalValue = acquiredSearchParam && validator(acquiredSearchParam) ? acquiredSearchParam : defaultValue;
 
-  /**
-   * @description The set() method of the useStringState  interface set and remove duplicated the params value.
-   * @param newValue
-   * @param replace
-   * @return void
-   */
   const set = (newValue: string, replace = true) => {
     // if we are setting the default value, don't add it to the url
-    if (newValue === options.defaultValue) {
+    if (newValue === defaultValue) {
       setSearchParams(
         (prev) => {
           prev.delete(searchParamName);
@@ -42,7 +38,7 @@ export function useStringState<T extends string>(
 
   useEffect(() => {
     // if the url has the default value, remove it
-    if (finalValue === options.defaultValue) {
+    if (finalValue === defaultValue) {
       searchParams.delete(searchParamName);
       setSearchParams(searchParams);
 

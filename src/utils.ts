@@ -33,3 +33,7 @@ export function arraysAreIdentical<T>(arr1: T[], arr2: T[]): boolean {
 
   return true;
 }
+
+export function assertString(x: unknown): x is string {
+  return typeof x === "string";
+}

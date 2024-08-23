@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { customRenderHook, updateUrlSearchParams } from "./useBooleanState.test";
 import { before } from "node:test";
 import { useMultiNumberState } from "../src";
+import { customRenderHook, updateUrlSearchParams } from "../src/test-utils";
 
 const param = "ids";
 const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
