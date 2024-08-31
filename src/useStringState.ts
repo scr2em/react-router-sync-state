@@ -6,7 +6,7 @@ export function useStringState<T extends string>(
   searchParamName: string,
   options: { defaultValue: T; validator?: (acquiredString: string) => acquiredString is T },
 ) {
-  const { defaultValue, validator = assertString } = options;
+  const { defaultValue, validator = assertString<T> } = options;
 
   const [searchParams, setSearchParams] = useSearchParams();
 
