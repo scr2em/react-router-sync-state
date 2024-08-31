@@ -12,21 +12,21 @@ describe("useNumberState", () => {
     it(`should be include a value equal ${value}`, () => {
       updateUrlSearchParams(`?${param}=${value}`);
       const { result } = customRenderHook(() => useNumberState(param, { defaultValue: defaultValue }));
-      expect(result.current.value).toBe(value);
+      expect(result.current[0]).toBe(value);
     });
 
     it(`Should be get ${defaultValue} as a default value when pass param without value`, function () {
       updateUrlSearchParams(`${param}=`);
       const { result } = customRenderHook(() => useNumberState(param, { defaultValue: defaultValue }));
 
-      expect(result.current.value).toBe(defaultValue);
+      expect(result.current[0]).toBe(defaultValue);
     });
 
     it(`Should be get ${defaultValue} as a default value when not pass the target param.`, function () {
       updateUrlSearchParams(``);
       const { result } = customRenderHook(() => useNumberState(param, { defaultValue: defaultValue }));
 
-      expect(result.current.value).toBe(defaultValue);
+      expect(result.current[0]).toBe(defaultValue);
     });
 
     it(`Should be not include param ${param} when set default value`, function () {
@@ -42,7 +42,7 @@ describe("useNumberState", () => {
       before(function () {
         updateUrlSearchParams(`${param}=${value}`);
         const { result } = customRenderHook(() => useNumberState(param, { defaultValue: defaultValue }));
-        result.current.set(defaultValue);
+        result.current[1](defaultValue);
       });
 
       expect(window.location.search).toBe("");
@@ -52,11 +52,11 @@ describe("useNumberState", () => {
       before(function () {
         updateUrlSearchParams(`${param}=${value}`);
         const { result } = customRenderHook(() => useNumberState(param, { defaultValue: defaultValue }));
-        result.current.set(value);
+        result.current[1](value);
       });
 
       const { result } = customRenderHook(() => useNumberState(param, { defaultValue: defaultValue }));
-      expect(result.current.value).toBe(value);
+      expect(result.current[0]).toBe(value);
     });
   });
 });

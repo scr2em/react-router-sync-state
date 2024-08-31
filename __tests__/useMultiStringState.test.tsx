@@ -16,7 +16,7 @@ describe("useMultiStringState", function () {
         useMultiStringState(param, { defaultValue: ids, delimiter: delimiter }),
       );
 
-      expect(result.current.value).toEqual(ids);
+      expect(result.current[0]).toEqual(ids);
     });
 
     it("Should be initialize with default value if no search param is set as a 'String", function () {
@@ -24,14 +24,14 @@ describe("useMultiStringState", function () {
         useMultiStringState(param, { defaultValue: ids, delimiter: delimiter }),
       );
 
-      expect(result.current.value).toEqual(ids);
+      expect(result.current[0]).toEqual(ids);
     });
 
     it(`Should be get ${defaultValue} as a default value when not pass the target param.`, function () {
       updateUrlSearchParams(``);
       const { result } = customRenderHook(() => useMultiStringState(param, { defaultValue: [], delimiter }));
 
-      expect(result.current.value).toEqual([]);
+      expect(result.current[0]).toEqual([]);
     });
   });
 
@@ -40,7 +40,7 @@ describe("useMultiStringState", function () {
       before(function () {
         updateUrlSearchParams(`${param}=`);
         const { result } = customRenderHook(() => useMultiStringState(param, { defaultValue: [], delimiter }));
-        result.current.set([]);
+        result.current[1]([]);
       });
 
       expect(window.location.search).toBe("");
@@ -50,7 +50,7 @@ describe("useMultiStringState", function () {
       before(function () {
         updateUrlSearchParams(`${param}=${defaultValue}`);
         const { result } = customRenderHook(() => useMultiStringState(param, { defaultValue: [], delimiter }));
-        result.current.set(newIds);
+        result.current[1](newIds);
       });
 
       const params = new URLSearchParams();

@@ -45,8 +45,5 @@ export function useNumberState(searchParamName: string, options: { defaultValue:
     }
   }, []);
 
-  return {
-    value: finalValue,
-    set,
-  };
+  return [finalValue, set] as const;
 }

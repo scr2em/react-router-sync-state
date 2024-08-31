@@ -17,20 +17,20 @@ describe("useStringState", () => {
       updateUrlSearchParams(`${param}=${username}`);
       const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
-      expect(result.current.value).toBe(username);
+      expect(result.current[0]).toBe(username);
     });
 
     it("should use default value when URL parameter is empty", () => {
       updateUrlSearchParams(`${param}=`);
       const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
-      expect(result.current.value).toBe(defaultValue);
+      expect(result.current[0]).toBe(defaultValue);
     });
 
     it("should use default value when URL parameter is not present", () => {
       const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
-      expect(result.current.value).toBe(defaultValue);
+      expect(result.current[0]).toBe(defaultValue);
     });
 
     it("should not include param in URL when value is default", () => {
@@ -46,7 +46,7 @@ describe("useStringState", () => {
       updateUrlSearchParams(`${param}=${username}`);
       const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
-      result.current.set(defaultValue);
+      result.current[1](defaultValue);
 
       expect(window.location.search).toBe("");
     });
@@ -55,7 +55,7 @@ describe("useStringState", () => {
       updateUrlSearchParams(`${param}=${username}`);
       const { result } = customRenderHook(() => useStringState(param, { defaultValue }));
 
-      result.current.set(newValue);
+      result.current[1](newValue);
 
       expect(window.location.search).toBe(`?${param}=${newValue}`);
     });

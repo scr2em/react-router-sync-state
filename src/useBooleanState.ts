@@ -46,11 +46,9 @@ export function useBooleanState(searchParamName: string, options: { defaultValue
     }
   }, []);
 
-  return {
-    value: finalValue,
-    set,
-    toggle: () => {
-      set(!finalValue);
-    },
-  };
+  function toggle() {
+    set(!finalValue);
+  }
+
+  return [finalValue, set, toggle] as const;
 }

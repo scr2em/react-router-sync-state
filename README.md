@@ -31,7 +31,7 @@ This hook manages a string value in the URL.
 import { useStringState } from '@scr2em/react-router-sync-state';
 
 function StringExample() {
-  const { value, set } = useStringState("name", {
+  const [value, setValue] = useStringState("name", {
     defaultValue: "john",
   });
 
@@ -40,7 +40,7 @@ function StringExample() {
         value={value}
         type="text"
         onInput={(e) => {
-            set(e.target.value as string);
+            setValue(e.target.value as string);
         }}
       />
   );
@@ -55,14 +55,14 @@ This hook manages a number value in the URL.
 import { useNumberState } from '@scr2em/react-router-sync-state';
 
 function NumberExample() {
-  const { value, set } = useNumberState("page", { defaultValue: 1 });
+  const [value, setValue] = useNumberState("page", { defaultValue: 1 });
 
   return (
       <input
         value={value}
         type="number"
         onInput={(e) => {
-            set(Number(e.target.value));
+            setValue(Number(e.target.value));
         }}
       />
   );
@@ -77,7 +77,7 @@ This hook manages a boolean value in the URL.
 import { useBooleanState } from '@scr2em/react-router-sync-state';
 
 function BooleanExample() {
-  const { value, toggle, set } = useBooleanState("toggle", { defaultValue: true });
+  const [value, setValue, toggle] = useBooleanState("toggle", { defaultValue: true });
 
   return (
     <div>
@@ -96,7 +96,7 @@ This hook manages an array of strings in the URL.
 import { useMultiStringState } from '@scr2em/react-router-sync-state';
 
 function MultiStringExample() {
-  const { value, set } = useMultiStringState("tags", {
+  const [value, setValue] = useMultiStringState("tags", {
     defaultValue: ["react", "hooks"],
     delimiter: ","
   });
@@ -106,7 +106,7 @@ function MultiStringExample() {
       {value.map((tag, index) => (
         <span key={index}>{tag}</span>
       ))}
-      <button onClick={() => set([...value, "newTag"])}>Add Tag</button>
+      <button onClick={() => setValue([...value, "newTag"])}>Add Tag</button>
     </div>
   );
 }
@@ -120,7 +120,7 @@ This hook manages an array of numbers in the URL.
 import { useMultiNumberState } from '@scr2em/react-router-sync-state';
 
 function MultiNumberExample() {
-  const { value, set } = useMultiNumberState("ids", {
+  const [value, setValue] = useMultiNumberState("ids", {
     defaultValue: [1, 2, 3],
     delimiter: "-"
   });
@@ -130,7 +130,7 @@ function MultiNumberExample() {
       {value.map((id, index) => (
         <span key={index}>{id}</span>
       ))}
-      <button onClick={() => set([...value, value.length + 1])}>Add ID</button>
+      <button onClick={() => setValue([...value, value.length + 1])}>Add ID</button>
     </div>
   );
 }
@@ -138,7 +138,7 @@ function MultiNumberExample() {
 
 ## API Reference
 
-Each hook returns an object with the following properties:
+Each hook returns an array [value, set, toggle] where:
 
 - `value`: The current value of the state.
 - `set`: A function to update the state value.

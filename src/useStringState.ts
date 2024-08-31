@@ -49,8 +49,5 @@ export function useStringState<T extends string>(
     }
   }, []);
 
-  return {
-    value: finalValue,
-    set,
-  };
+  return [finalValue, set] as const;
 }

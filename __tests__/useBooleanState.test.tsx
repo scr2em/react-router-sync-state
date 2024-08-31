@@ -10,14 +10,14 @@ describe("useBooleanState", () => {
   it("should not set the default value (false) in the url", async () => {
     const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: false }));
 
-    expect(result.current.value).toBe(false);
+    expect(result.current[0]).toBe(false);
     expect(window.location.search).toBe("");
   });
 
   it("should set the default value (true) in the url", async () => {
     const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: true }));
 
-    expect(result.current.value).toBe(true);
+    expect(result.current[0]).toBe(true);
     expect(window.location.search).toBe("");
   });
 
@@ -27,7 +27,7 @@ describe("useBooleanState", () => {
 
     const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: true }));
 
-    expect(result.current.value).toBe(true);
+    expect(result.current[0]).toBe(true);
     expect(window.location.search).toBe("");
   });
 
@@ -37,23 +37,23 @@ describe("useBooleanState", () => {
 
     const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: false }));
 
-    expect(result.current.value).toBe(false);
+    expect(result.current[0]).toBe(false);
     expect(window.location.search).toBe("");
   });
 
   it("should toggle the value", async () => {
     const { result } = customRenderHook(() => useBooleanState("testParam", { defaultValue: false }));
 
-    expect(result.current.value).toBe(false);
+    expect(result.current[0]).toBe(false);
     expect(window.location.search).toBe("");
 
-    act(() => result.current.toggle());
+    act(() => result.current[2]());
 
-    expect(result.current.value).toBe(true);
+    expect(result.current[0]).toBe(true);
     expect(window.location.search).toBe("?testParam=true");
     //
-    act(() => result.current.toggle());
-    expect(result.current.value).toBe(false);
+    act(() => result.current[2]());
+    expect(result.current[0]).toBe(false);
     expect(window.location.search).toBe("");
   });
 
@@ -62,11 +62,11 @@ describe("useBooleanState", () => {
 
     expect(window.location.search).toBe("");
 
-    const { set } = result.current;
+    const set = result.current[1];
 
     act(() => set(true));
 
-    expect(result.current.value).toBe(true);
+    expect(result.current[0]).toBe(true);
     expect(window.location.search).toBe("?testParam=true");
   });
 
@@ -75,11 +75,11 @@ describe("useBooleanState", () => {
 
     expect(window.location.search).toBe("");
 
-    const { set } = result.current;
+    const set = result.current[1];
 
-    act(() => set(false));
+    act(() => result.current[1](false));
 
-    expect(result.current.value).toBe(false);
+    expect(result.current[0]).toBe(false);
     expect(window.location.search).toBe("");
   });
 });

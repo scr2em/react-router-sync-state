@@ -39,8 +39,5 @@ export function useMultiStringState(searchParamName: string, options: { defaultV
     }
   }, []);
 
-  return {
-    value: finalValue,
-    set,
-  };
+  return [finalValue, set] as const;
 }

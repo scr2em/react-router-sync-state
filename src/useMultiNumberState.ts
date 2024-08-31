@@ -48,8 +48,5 @@ export function useMultiNumberState(searchParamName: string, options: { defaultV
     }
   }, []);
 
-  return {
-    value: finalValue,
-    set,
-  };
+  return [finalValue, set] as const;
 }
