@@ -27,7 +27,7 @@ Each hook allows you to synchronize state with URL search parameters, providing 
 
 This hook manages a string value in the URL.
 
-```typescript
+```tsx
 import { useStringState } from '@scr2em/react-router-sync-state';
 
 function StringExample() {
@@ -47,11 +47,42 @@ function StringExample() {
 }
 ```
 
+You can also use the hook with a validator function to validate the URL parameter value, if the value in the url
+doesn't match the `validator` function, it will fall back to the default value
+
+```tsx
+import { useStringState } from '@scr2em/react-router-sync-state';
+
+enum Cars {
+	BMW = "bmw",
+	AUDI = "audi",
+	MERCEDES = "mercedes",
+}
+
+function StringExample() {
+  const [value, setValue] = useStringState("cars", {
+	defaultValue: Cars.BMW,
+	validator: (value) : value is Cars => Object.values(Cars).includes(value as Cars)
+  });
+
+  return (
+	  <input
+		value={value} // value of type Cars
+		type="text"
+		onInput={(e) => {
+			setValue(e.target.value as string);
+		}}
+	  />
+  );
+}
+
+```
+
 ### useNumberState
 
 This hook manages a number value in the URL.
 
-```typescript
+```tsx
 import { useNumberState } from '@scr2em/react-router-sync-state';
 
 function NumberExample() {
@@ -73,7 +104,7 @@ function NumberExample() {
 
 This hook manages a boolean value in the URL.
 
-```typescript
+```tsx
 import { useBooleanState } from '@scr2em/react-router-sync-state';
 
 function BooleanExample() {
@@ -92,7 +123,7 @@ function BooleanExample() {
 
 This hook manages an array of strings in the URL.
 
-```typescript
+```tsx
 import { useMultiStringState } from '@scr2em/react-router-sync-state';
 
 function MultiStringExample() {
@@ -116,7 +147,7 @@ function MultiStringExample() {
 
 This hook manages an array of numbers in the URL.
 
-```typescript
+```tsx
 import { useMultiNumberState } from '@scr2em/react-router-sync-state';
 
 function MultiNumberExample() {
