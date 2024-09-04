@@ -38,12 +38,12 @@ export function useMultiNumberState(searchParamName: string, options: { defaultV
     // if the url has the default value, remove it
     if (arraysAreIdentical(finalValue, options.defaultValue)) {
       searchParams.delete(searchParamName);
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     } else {
       // if the url has an invalid value, remove it
       if (acquiredSearchParam && !isStringArrayOfNumbers(acquiredSearchParam, options.delimiter)) {
         searchParams.delete(searchParamName);
-        setSearchParams(searchParams);
+        setSearchParams(searchParams, { replace: true });
       }
     }
   }, []);

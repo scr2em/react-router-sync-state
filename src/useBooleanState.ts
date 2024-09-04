@@ -36,12 +36,12 @@ export function useBooleanState(searchParamName: string, options: { defaultValue
     // if the url has the default value, remove it
     if (finalValue === options.defaultValue) {
       searchParams.delete(searchParamName);
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     } else {
       // if the url has an invalid value, remove it
       if (acquiredSearchParam && !["true", "false"].includes(acquiredSearchParam)) {
         searchParams.delete(searchParamName);
-        setSearchParams(searchParams);
+        setSearchParams(searchParams, { replace: true });
       }
     }
   }, []);

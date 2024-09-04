@@ -40,12 +40,12 @@ export function useStringState<T extends string>(
     // if the url has the default value, remove it
     if (finalValue === defaultValue) {
       searchParams.delete(searchParamName);
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
 
       // acquiredSearchParam = string | null
     } else if (!acquiredSearchParam) {
       searchParams.delete(searchParamName);
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     }
   }, []);
 

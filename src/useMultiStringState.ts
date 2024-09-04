@@ -35,7 +35,7 @@ export function useMultiStringState(searchParamName: string, options: { defaultV
     // if the url has the default value, remove it
     if (arraysAreIdentical<string | number>(finalValue, options.defaultValue)) {
       searchParams.delete(searchParamName);
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     }
   }, []);
 
