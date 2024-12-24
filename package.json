@@ -1,6 +1,6 @@
 {
 	"name": "@scr2em/react-router-sync-state",
-	"version": "1.0.8",
+	"version": "7.0.0",
 	"description": "",
 	"main": "dist/index.mjs",
 	"types": "dist/index.d.mts",
@@ -27,7 +27,7 @@
 	"peerDependencies": {
 		"react": ">=18",
 		"react-dom": ">=18",
-		"react-router-dom": ">=6"
+		"react-router": ">=7"
 	},
 	"devDependencies": {
 		"@types/react": "18.2.67",

@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { useEffect } from "react";
 
 export function useBooleanState(searchParamName: string, options: { defaultValue: boolean }) {

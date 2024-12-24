@@ -1,6 +1,6 @@
 import { useBooleanState } from "./useBooleanState";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import { useNumberState } from "./useNumberState";
 import { useMultiNumberState } from "./useMultiNumberState";
 import { useStringState } from "./useStringState";
